@@ -41,7 +41,7 @@ public class Main {
     Configuration conf = Configuration.init(logger, args);
 
     List<String> issue_paths =
-        SimplePartition.splitFile(conf.getNumberOfCPUS(), conf.getIssuePath(), "./issues");
+        SimplePartition.splitFile(conf.getNumberOfCPUS(), conf.getIssuePath(), conf.getRootPath()+"/issues");
     if (issue_paths.isEmpty()) return;
 
     List<GitParserThread> parsers = new LinkedList<>();

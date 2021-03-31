@@ -47,6 +47,7 @@ public class Configuration {
   private String repoPath = null;
   private String resPath = "results";
   private String partialFixPattern = "fix";
+  private String rootPath = "";
 
   private boolean omitLineText = false;
 
@@ -128,6 +129,12 @@ public class Configuration {
       instance.setOmitLineText(true);
     }
 
+    if (cmd.hasOption("y")){
+      instance.setRootPath(cmd.getOptionValue("y"));
+      instance.setResultPath(cmd.getOptionValue("y")+"/results");
+      logger.info(instance.getRootPath());
+    }
+
     return instance;
   }
 
@@ -195,6 +202,15 @@ public class Configuration {
     this.resPath = resPath;
   }
 
+  public String getRootPath() {
+    return rootPath;
+  }
+
+  protected void setRootPath(String rootPath) {
+    this.rootPath = rootPath;
+  }
+
+
   public String getPartialFixPattern() {
     return partialFixPattern;
   }
@@ -256,6 +272,10 @@ public class Configuration {
         new Option("olt", false, "Only output the line numbers in the annotation graph.");
     omitLineTextOption.setRequired(false);
     options.addOption(omitLineTextOption);
+
+    Option resultPathOption = new Option("y", true, "result path");
+    resultPathOption.setRequired(true);
+    options.addOption(resultPathOption);
 
     return options;
   }

@@ -29,3 +29,6 @@ szz/gradle.properties
 .gradle
 
 model/data
+
+*.DS_Store*
+examples/data/jars/*

@@ -137,14 +137,18 @@ public class SimplePartition {
       File dir = new File(path);
       if (dir.exists() && dir.isDirectory()) {
         try {
-          JSONObject commit = (JSONObject) parser.parse(new FileReader(path + "/" + COMMITSPATH));
-          commits.add(commit);
-          JSONObject annotation =
-              (JSONObject) parser.parse(new FileReader(path + "/" + ANNOTATIONPATH));
-          annotations.add(annotation);
-          JSONArray pair =
-              (JSONArray) parser.parse(new FileReader(path + "/" + FIXINTRODUCERSPATH));
-          fix_and_introducers_pairs.add(pair);
+          File file = new File(path + "/" + COMMITSPATH);
+          if(file.exists()){
+            JSONObject commit = (JSONObject) parser.parse(new FileReader(path + "/" + COMMITSPATH));
+            commits.add(commit);
+            JSONObject annotation =
+                (JSONObject) parser.parse(new FileReader(path + "/" + ANNOTATIONPATH));
+            annotations.add(annotation);
+            JSONArray pair =
+                (JSONArray) parser.parse(new FileReader(path + "/" + FIXINTRODUCERSPATH));
+            fix_and_introducers_pairs.add(pair);
+          }
+          
         } catch (IOException | ParseException e) {
           e.printStackTrace();
         }
